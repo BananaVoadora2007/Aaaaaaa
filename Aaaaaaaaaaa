@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rede Inteligente de Descanso</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f2f2f2;
+text-align:center;
+}
+
+.container{
+background:white;
+padding:20px;
+margin:30px auto;
+width:350px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+input{
+width:90%;
+padding:8px;
+margin:5px;
+}
+
+button{
+padding:10px;
+margin:10px;
+background:#2e7dff;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+#alerta{
+display:none;
+background:red;
+color:white;
+padding:10px;
+margin:10px;
+border-radius:5px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Rede Inteligente de Descanso</h1>
+
+<div class="container">
+
+<h2>Cadastro da Viagem</h2>
+
+<input type="text" id="motorista" placeholder="Nome do motorista">
+
+<input type="text" id="empresa" placeholder="Empresa da carga">
+
+<input type="text" id="carga" placeholder="Tipo de carga">
+
+<input type="number" id="peso" placeholder="Peso da carga (Kg)">
+
+<input type="text" id="destino" placeholder="Destino">
+
+<input type="number" id="tempo" placeholder="Tempo mínimo da viagem (horas)">
+
+<button onclick="iniciarViagem()">Iniciar Viagem</button>
+
+</div>
+
+<div class="container">
+
+<h2>Monitoramento</h2>
+
+<div id="alerta">
+⚠ FADIGA DETECTADA! Procure uma estação de descanso.
+</div>
+
+<button onclick="simularFadiga()">Simular Fadiga</button>
+
+<button onclick="mostrarLocalizacao()">Mostrar Estações de Descanso</button>
+
+<p id="localizacao"></p>
+
+</div>
+
+<script>
+
+function iniciarViagem(){
+
+let motorista = document.getElementById("motorista").value
+let empresa = document.getElementById("empresa").value
+let carga = document.getElementById("carga").value
+let peso = document.getElementById("peso").value
+let destino = document.getElementById("destino").value
+let tempo = document.getElementById("tempo").value
+
+alert("Viagem iniciada!\nMotorista: " + motorista +
+"\nEmpresa: " + empresa +
+"\nCarga: " + carga +
+"\nDestino: " + destino)
+
+}
+
+function simularFadiga(){
+
+document.getElementById("alerta").style.display="block"
+
+alert("ALERTA enviado para a empresa!")
+
+}
+
+function mostrarLocalizacao(){
+
+if(navigator.geolocation){
+
+navigator.geolocation.getCurrentPosition(function(posicao){
+
+let lat = posicao.coords.latitude
+let lon = posicao.coords.longitude
+
+document.getElementById("localizacao").innerHTML =
+"Localização do motorista: <br> Latitude: "+lat+
+"<br> Longitude: "+lon+
+"<br><br> Estação de descanso mais próxima sugerida."
+
+})
+
+}else{
+
+alert("Geolocalização não suportada")
+
+}
+
+}
+
+</script>
+<footer>
+
+<p>Feito por: Ana Carolina, Brendha, Josue, Marcus e Rodolfo</p>
+
+</footer>
+
+</body>
+</html>
+
